@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basti Marra — Writer</title>
+  <meta name="description" content="Poetry, fiction, philosophy. The writings of Basti Marra.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: #111111;
+      --text: #d4cfc6;
+      --text-muted: #6b6560;
+      --accent: #8b2d2d;
+      --accent-soft: rgba(139,45,45,0.15);
+      --gold: #a08850;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+      transition: background 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .lang-toggle {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: none;
+      border: 1px solid rgba(160,136,80,0.3);
+      padding: 4px 12px;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: all 0.3s;
+    }
+
+    .lang-toggle:hover {
+      background: rgba(160,136,80,0.1);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/hero-angel.jpg') center center / cover no-repeat;
+      opacity: 0.3;
+      filter: brightness(0.6);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(10,10,10,0.4) 0%,
+        rgba(10,10,10,0.2) 40%,
+        rgba(10,10,10,0.7) 80%,
+        var(--bg) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 40px;
+      max-width: 800px;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 12px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 16px;
+      color: #e8e0d0;
+    }
+
+    .hero-sub {
+      font-size: 0.7rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 48px;
+    }
+
+    .hero-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeQuote 1.5s ease forwards;
+      animation-delay: 0.5s;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeQuote {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 0.85; transform: translateY(0); }
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 120px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .section-line {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-bottom: 48px;
+    }
+
+    /* ── POEM BLOCKS ── */
+    .poem-block {
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .poem-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .poem-text {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      line-height: 2;
+      color: var(--text);
+      opacity: 0.85;
+      max-width: 600px;
+    }
+
+    .poem-text br { content: ''; display: block; margin-top: 4px; }
+
+    .poem-divider {
+      width: 30px;
+      height: 1px;
+      background: var(--text-muted);
+      margin: 60px 0;
+      opacity: 0.3;
+    }
+
+    /* ── IMAGE BREAK ── */
+    .image-break {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      height: 50vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      filter: brightness(0.7);
+    }
+
+    .image-break-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg), transparent 20%, transparent 80%, var(--bg));
+    }
+
+    .image-break-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .image-break-text blockquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      color: var(--text);
+      text-align: center;
+      max-width: 700px;
+      line-height: 1.9;
+      opacity: 0.9;
+    }
+
+    /* ── PROSE / NOVEL ── */
+    .prose-excerpt {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      line-height: 2.1;
+      color: var(--text);
+      opacity: 0.82;
+      max-width: 680px;
+      column-count: 1;
+    }
+
+    .prose-excerpt p {
+      margin-bottom: 24px;
+      text-indent: 2em;
+    }
+
+    .prose-excerpt p:first-child {
+      text-indent: 0;
+    }
+
+    .prose-excerpt p:first-child::first-letter {
+      font-size: 3.5rem;
+      float: left;
+      line-height: 1;
+      margin: 0 12px 0 0;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .work-label {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .work-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ── ESSAY ── */
+    .essay-text {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+      opacity: 0.78;
+      max-width: 650px;
+    }
+
+    .essay-text p {
+      margin-bottom: 24px;
+    }
+
+    .highlight-line {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--text);
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+      margin: 48px 0;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: grayscale(30%) brightness(0.9);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .about-text p { margin-bottom: 20px; }
+
+    .about-name {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 4px;
+      color: var(--text);
+      letter-spacing: 2px;
+    }
+
+    .about-location {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      text-align: center;
+      padding: 120px 40px 80px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 32px;
+    }
+
+    .contact-links a {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .contact-links a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    footer span {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 0.6rem; letter-spacing: 2px; }
+      section { padding: 80px 24px; }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-portrait { max-width: 240px; }
+      .contact-links { flex-direction: column; gap: 20px; }
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-en { display: none; }
+    body.en .lang-es { display: none; }
+    body.en .lang-en { display: block; }
+    body.en .lang-en-inline { display: inline; }
+    body.en .lang-es-inline { display: none; }
+    .lang-en-inline { display: none; }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <a href="#" class="nav-logo">Basti Marra</a>
+  <ul class="nav-links">
+    <li><a href="#obra"><span class="lang-es-inline">Obra</span><span class="lang-en-inline">Work</span></a></li>
+    <li><a href="#novela"><span class="lang-es-inline">Novela</span><span class="lang-en-inline">Novel</span></a></li>
+    <li><a href="#ensayo"><span class="lang-es-inline">Ensayo</span><span class="lang-en-inline">Essay</span></a></li>
+    <li><a href="#about"><span class="lang-es-inline">Sobre</span><span class="lang-en-inline">About</span></a></li>
+    <li><button class="lang-toggle" onclick="toggleLang()">EN / ES</button></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-name">Basti<br>Marra</div>
+    <div class="hero-sub">
+      <span class="lang-es-inline">Escritor &nbsp;&middot;&nbsp; Poeta &nbsp;&middot;&nbsp; Ensayista</span>
+      <span class="lang-en-inline">Writer &nbsp;&middot;&nbsp; Poet &nbsp;&middot;&nbsp; Essayist</span>
+    </div>
+    <div class="hero-line"></div>
+    <div class="hero-quote">
+      <span class="lang-es">Encendido devoraría.<br>Encendido quemaría.<br>Encendido me toparía.<br>Solo por amarte.</span>
+      <span class="lang-en">Set ablaze I would devour.<br>Set ablaze I would burn.<br>Set ablaze I would collide.<br>Only to love you.</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="lang-es-inline">Descender</span>
+    <span class="lang-en-inline">Descend</span>
+    &nbsp; &darr;
+  </div>
+</div>
+
+
+<!-- ═══════════════ POETRY ═══════════════ -->
+<section id="obra">
+  <div class="fade-in">
+    <div class="section-label">
+      <span class="lang-es-inline">Poemas</span>
+      <span class="lang-en-inline">Poetry</span>
+    </div>
+    <div class="section-title">
+      <span class="lang-es">Hijos del Sol</span>
+      <span class="lang-en">Children of the Sun</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="poem-block fade-in">
+    <div class="poem-text">
+      <span class="lang-es">
+        Me revuelco con tus alas, me devoro tus manos,<br>
+        no soy m&aacute;s que tu refracci&oacute;n,<br>
+        somos la intensidad en su devenir m&aacute;s humano.<br><br>
+        Te contemplo estimulando los vientos,<br>
+        destruyendo las rejas,<br>
+        estas cerca de mi locura.<br><br>
+        Me encierro en tus brazos, me destrozan tus labios.<br><br>
+        No eres un dios, tampoco un &aacute;ngel.<br><br>
+        Me invitaste a correr dentro de ti.<br>
+        Esos caminos no son ventanas al infierno<br>
+        por eso los amo.<br><br>
+        No eres un animal, tampoco un hombre.<br><br>
+        Me dejaste so&ntilde;ar con ecos de poder.<br>
+        Me hiciste guerrero de tu lucha.<br>
+        Pero todav&iacute;a no se que eres.<br><br>
+        Me hiciste hombre,<br>
+        me topaste con las m&aacute;s duras fieras.<br>
+        Sin embargo no deviniste en hombre y me ayudaste.<br><br>
+        Pelee con tus suaves deseos, llegue al placer.<br>
+        Contemple junto a tus ojos el aire de libertad.<br><br>
+        Se quien eres, te toco, estas en mi.<br>
+        Me hice fuego al fin.
+      </span>
+      <span class="lang-en">
+        I writhe with your wings, I devour your hands,<br>
+        I am nothing more than your refraction,<br>
+        we are intensity in its most human becoming.<br><br>
+        I watch you stirring the winds,<br>
+        destroying the bars,<br>
+        you are close to my madness.<br><br>
+        I lock myself in your arms, your lips destroy me.<br><br>
+        You are not a god, nor an angel.<br><br>
+        You invited me to run inside you.<br>
+        Those paths are not windows to hell<br>
+        that is why I love them.<br><br>
+        You are not an animal, nor a man.<br><br>
+        You let me dream with echoes of power.<br>
+        You made me a warrior of your fight.<br>
+        But I still don't know what you are.<br><br>
+        You made me a man,<br>
+        you threw me against the fiercest beasts.<br>
+        Yet you did not become a man and you helped me.<br><br>
+        I fought with your gentle desires, I reached pleasure.<br>
+        I beheld alongside your eyes the air of freedom.<br><br>
+        I know who you are, I touch you, you are in me.<br>
+        I became fire at last.
+      </span>
+    </div>
+  </div>
+
+  <div class="poem-divider"></div>
+
+  <div class="poem-block fade-in">
+    <div class="poem-title">
+      <span class="lang-es">Padres del Alba</span>
+      <span class="lang-en">Fathers of Dawn</span>
+    </div>
+    <div class="poem-text">
+      <span class="lang-es">
+        Encendido en la complejidad no quiero dejar de pensarte.<br>
+        Entorno es solo lo que no nos ve atando nuestras manos.<br><br>
+        Ese golpear de los vientos oxigena el pecho de los guerreros.<br><br>
+        Devorar&eacute; un &aacute;ngel y crear&eacute; la puerta<br>
+        para que mi fuego siga creciendo.<br>
+        Quemar&eacute; cada parte de ese todo que busca unidad.<br>
+        Me topar&eacute; con toda el agua que intente<br>
+        sentenciarme a la mortalidad.<br><br>
+        M&eacute;tete aqu&iacute; en mi fuego<br>
+        &aacute;ngel o Dios de los morales.<br>
+        Arder&aacute;s como si tu propio interior<br>
+        cediera paso al placer.<br><br>
+        Ese golpear de los vientos oxigena mi deseo.<br><br>
+        Encendido devorar&iacute;a.<br>
+        Encendido quemar&iacute;a.<br>
+        Encendido me topar&iacute;a.<br>
+        Solo por amarte.
+      </span>
+      <span class="lang-en">
+        Ablaze in complexity I cannot stop thinking of you.<br>
+        Surroundings are merely what cannot see us binding our hands.<br><br>
+        That beating of winds oxygenates the chests of warriors.<br><br>
+        I will devour an angel and build the door<br>
+        so my fire keeps growing.<br>
+        I will burn every part of that whole that seeks unity.<br>
+        I will face all the water that tries<br>
+        to sentence me to mortality.<br><br>
+        Come into my fire<br>
+        angel or God of morals.<br>
+        You will burn as if your own interior<br>
+        gave way to pleasure.<br><br>
+        That beating of winds oxygenates my desire.<br><br>
+        Set ablaze I would devour.<br>
+        Set ablaze I would burn.<br>
+        Set ablaze I would collide.<br>
+        Only to love you.
+      </span>
+    </div>
+  </div>
+
+  <div class="poem-divider"></div>
+
+  <div class="poem-block fade-in">
+    <div class="poem-title">
+      <span class="lang-es">Manada</span>
+      <span class="lang-en">The Pack</span>
+    </div>
+    <div class="poem-text">
+      <span class="lang-es">
+        Tratar de ver el cielo con solo un ojo,<br>
+        cerrar mi p&aacute;rpado y saber que est&aacute;s conmigo.<br>
+        Tratar sin ser perforado por idealizaciones,<br>
+        intereses o pretensiones.<br><br>
+        Saber abrir los ojos,<br>
+        es ser manada de los vientos veloces.<br><br>
+        Provocar tu sonrisa sabiendo gobernar mi deseo,<br>
+        es ser manada de monta&ntilde;as elevadas.<br><br>
+        Romper con fuerza las ataduras,<br>
+        es ser manada de bosques frondosos.<br><br>
+        Animarme, es poder.<br>
+        Te siento a mi lado.
+      </span>
+      <span class="lang-en">
+        Trying to see the sky with only one eye,<br>
+        closing my eyelid and knowing you're with me.<br>
+        Trying without being pierced by idealizations,<br>
+        interests or pretensions.<br><br>
+        Knowing how to open your eyes,<br>
+        is to be a pack of swift winds.<br><br>
+        Provoking your smile while governing my desire,<br>
+        is to be a pack of towering mountains.<br><br>
+        Breaking bonds with force,<br>
+        is to be a pack of lush forests.<br><br>
+        Daring is power.<br>
+        I feel you beside me.
+      </span>
+    </div>
+  </div>
+
+  <div class="poem-divider"></div>
+
+  <div class="poem-block fade-in">
+    <div class="poem-title">
+      <span class="lang-es">Corriente de Libertad</span>
+      <span class="lang-en">Current of Freedom</span>
+    </div>
+    <div class="poem-text">
+      <span class="lang-es">
+        Con la claridad se riegan los campos,<br>
+        se cultiva al hombre<br>
+        y as&iacute; se brotan de frutos los bosques del saber.<br><br>
+        Ella es la herramienta del hombre de la tierra,<br>
+        del animal de los vientos.<br>
+        Es el espacio donde se funde la totalidad<br>
+        y nace el devenir.<br><br>
+        Por eso el agua es la madre de la claridad,<br>
+        porque en ella nos sumergimos, nos vemos,<br>
+        flotamos y somos miles de colores, luz y tierra.<br><br>
+        Seamos libres entonces.<br>
+        Seamos claros.<br>
+        Seamos agua.
+      </span>
+      <span class="lang-en">
+        With clarity the fields are watered,<br>
+        mankind is cultivated<br>
+        and the forests of knowledge bear fruit.<br><br>
+        It is the tool of the man of earth,<br>
+        of the animal of winds.<br>
+        It is the space where totality fuses<br>
+        and becoming is born.<br><br>
+        That is why water is the mother of clarity,<br>
+        because in it we submerge, we see ourselves,<br>
+        we float and we are thousands of colors, light and earth.<br><br>
+        Let us be free then.<br>
+        Let us be clear.<br>
+        Let us be water.
+      </span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ IMAGE BREAK 1 ═══════════════ -->
+<div class="image-break">
+  <img src="images/rose.jpg" alt="">
+  <div class="image-break-overlay"></div>
+  <div class="image-break-text">
+    <blockquote>
+      <span class="lang-es">&laquo;No puedo temer m&aacute;s que de m&iacute; mismo&raquo;</span>
+      <span class="lang-en">&laquo;I can fear nothing more than myself&raquo;</span>
+    </blockquote>
+  </div>
+</div>
+
+
+<!-- ═══════════════ NOVEL ═══════════════ -->
+<section id="novela">
+  <div class="fade-in">
+    <div class="section-label">
+      <span class="lang-es-inline">Novela</span>
+      <span class="lang-en-inline">Novel</span>
+    </div>
+    <div class="section-title">
+      <span class="lang-es">Devorador de &Aacute;ngeles</span>
+      <span class="lang-en">Devourer of Angels</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="work-label">
+      <span class="lang-es-inline">Fragmento</span>
+      <span class="lang-en-inline">Excerpt</span>
+    </div>
+
+    <div class="prose-excerpt">
+      <span class="lang-es">
+        <p>Vi a los cerdos escupir toda su sangre en la piel de esos furiosos animales. Sus venas sobresalían como la peor verdad en la que se encontraban sumergidos. Como impacientes se sacudían de un lado a otro, sombríos, perfumados por la pasividad de tal crimen.</p>
+        <p>En la habitación, un vacío sumamente perforador, solo con un agujero en la pared, algo de agua y calor. La luz era la que me permitía brillar por las mañanas, en realidad ya había creado mis propias horas, no se bien de que sol se trataba.</p>
+        <p>Soy libre? &mdash; dude.<br>
+        &mdash; Te sangran las rodillas, escuchas que el padre regresara? &mdash; pregunto.<br>
+        &mdash; La moda llega con retraso a estos lugares &mdash; dije.</p>
+        <p>La pureza del nuevo lugar donde se encontraba mi cuerpo era hermosa. Como en el mismísimo descenso a los cielos. Mi hombro chorreaba sangre y mis muñecas estaban desangradas. El suelo y las paredes eran blancos, estaba acostado en el piso sin poder moverme. Fije la mirada a uno de ellos, quería decir que me ayudaran, pero nada salió de mi, solo se profundizó mi respiro.</p>
+        <p>&mdash; Las puertas se construyen, el que hizo este cuarto por ahí quería atraparte, atrapar al ezquizo &mdash; ahora me apuntaba con el arma.<br>
+        &mdash; Mira, vos me trajiste acá, no se que es&hellip; no se donde está la puerta, solo se que soy todo eso que no sabe que hacer&hellip;</p>
+      </span>
+      <span class="lang-en">
+        <p>I saw the pigs spit all their blood on the skin of those furious animals. Their veins protruded like the worst truth in which they were submerged. Impatiently they shook from side to side, somber, perfumed by the passivity of such a crime.</p>
+        <p>In the room, an excruciatingly piercing emptiness, just a hole in the wall, some water and heat. The light was what allowed me to shine in the mornings &mdash; in truth I had already created my own hours, I'm not sure which sun it was.</p>
+        <p>Am I free? &mdash; I doubted.<br>
+        &mdash; Your knees are bleeding, do you hear that the father will return? &mdash; he asked.<br>
+        &mdash; Fashion arrives late to these places &mdash; I said.</p>
+        <p>The purity of the new place where my body lay was beautiful. Like the very descent into heaven. My shoulder was dripping blood and my wrists were drained. The floor and walls were white, I was lying on the ground unable to move. I fixed my gaze on one of them, wanting to say help me, but nothing came out &mdash; only my breathing deepened.</p>
+        <p>&mdash; Doors are built. Whoever made this room maybe wanted to trap you, to trap the schizo &mdash; now he was pointing the gun at me.<br>
+        &mdash; Look, you brought me here, I don't know what this is&hellip; I don't know where the door is, I only know I'm everything that doesn't know what to do&hellip;</p>
+      </span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ IMAGE BREAK 2 ═══════════════ -->
+<div class="image-break">
+  <img src="images/skull-crown.jpg" alt="">
+  <div class="image-break-overlay"></div>
+  <div class="image-break-text">
+    <blockquote>
+      <span class="lang-es">&laquo;Los miedos son la muerte de la rebeli&oacute;n&raquo;</span>
+      <span class="lang-en">&laquo;Fears are the death of rebellion&raquo;</span>
+    </blockquote>
+  </div>
+</div>
+
+
+<!-- ═══════════════ LIBRO CONTINUO ═══════════════ -->
+<section>
+  <div class="fade-in">
+    <div class="section-label">
+      <span class="lang-es-inline">Libro</span>
+      <span class="lang-en-inline">Book</span>
+    </div>
+    <div class="section-title">
+      <span class="lang-es">Kaos y Velocidad</span>
+      <span class="lang-en">Kaos &amp; Velocity</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="work-label">Libro Continuo &mdash;
+      <span class="lang-es-inline">Descenso a los Cielos</span>
+      <span class="lang-en-inline">Descent Into the Heavens</span>
+    </div>
+
+    <div class="prose-excerpt">
+      <span class="lang-es">
+        <p>Anda hambriento nativo de sueños de amor, pronuncia tus últimas palabras &mdash; pronunció aquel de túnicas amplias, acariciando sus manos.</p>
+        <p>Respire profundo y hable&hellip; Es tiempo de que los aportes dementes de los cerdos impacientes, decaigan y que estos como los mediocres, deriven ansiosos en su propia miseria. Es hora de que las provisiones de defensa subsumen en peligro su propia naturaleza de represión.</p>
+        <p>A eso es lo que el hombre debe realizar su autodestrucción, lo demás es masturbación.</p>
+      </span>
+      <span class="lang-en">
+        <p>Go, hungry native of dreams of love, speak your last words &mdash; pronounced the one in wide tunics, caressing his hands.</p>
+        <p>I breathed deeply and spoke&hellip; It is time for the demented contributions of the impatient pigs to decay, and for them, like the mediocre, to drift anxiously in their own misery. It is time for the provisions of defense to subsume their own nature of repression into danger.</p>
+        <p>That is what man must do &mdash; his own self-destruction. Everything else is masturbation.</p>
+      </span>
+    </div>
+
+    <div class="highlight-line">
+      <span class="lang-es">Cada vez que me siento m&aacute;s cerca del descenso, me da m&aacute;s hambre. La sed de revoluci&oacute;n seca mi garganta y las palabras de los &Aacute;ngeles se sienten m&aacute;s cercanas.</span>
+      <span class="lang-en">Each time I feel closer to the descent, the hungrier I get. The thirst for revolution dries my throat and the words of the Angels feel nearer.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ IMAGE BREAK 3 ═══════════════ -->
+<div class="image-break">
+  <img src="images/storm.jpg" alt="">
+  <div class="image-break-overlay"></div>
+  <div class="image-break-text">
+    <blockquote>
+      <span class="lang-es">&laquo;Todo es caos y como tal no se subsume<br>a otra cosa que no sea su propia naturaleza, el todo&raquo;</span>
+      <span class="lang-en">&laquo;Everything is chaos and as such does not subsume<br>to anything other than its own nature, the whole&raquo;</span>
+    </blockquote>
+  </div>
+</div>
+
+
+<!-- ═══════════════ ESSAY ═══════════════ -->
+<section id="ensayo">
+  <div class="fade-in">
+    <div class="section-label">
+      <span class="lang-es-inline">Ensayo</span>
+      <span class="lang-en-inline">Essay</span>
+    </div>
+    <div class="section-title">
+      <span class="lang-es">Poliformas, Ladridos de Poder y Ambig&uuml;edad</span>
+      <span class="lang-en">Polyforms, Barks of Power &amp; Ambiguity</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="essay-text">
+      <span class="lang-es">
+        <p>Los ejes de la ansiedad siempre se establecen en orden a cosas que no nos atrevemos a sacar, motores &eacute;ticamente positivos y muchos negativos. Pero podemos usarla siempre como cargador y aprender a manipularla.</p>
+        <p>Alguna vez imaginaste la luz lejana pero que estirando la mano podes taparla? Esos sue&ntilde;os que sacrificas comprometen tu satisfacci&oacute;n, tu mano ya no puede hacer sombra. Entonces vas por otro objetivo definitivo, pero que muta.</p>
+      </span>
+      <span class="lang-en">
+        <p>The axes of anxiety are always established around things we dare not extract &mdash; ethically positive motors and many negative ones. But we can always use it as a charger and learn to manipulate it.</p>
+        <p>Have you ever imagined the distant light that you could cover just by stretching your hand? Those dreams you sacrifice compromise your satisfaction &mdash; your hand can no longer cast a shadow. So you go after another definitive goal, but one that mutates.</p>
+      </span>
+    </div>
+
+    <div class="highlight-line">
+      <span class="lang-es">La libertad no territorial es aquella que una vez lograda no te pueden quitar, por m&aacute;s que el control intente estarlo.</span>
+      <span class="lang-en">Non-territorial freedom is the kind that once achieved, cannot be taken from you &mdash; no matter how hard control tries.</span>
+    </div>
+
+    <div class="essay-text">
+      <span class="lang-es">
+        <p>Ser el que se levanta, el que camina por fuera de todos, es ser rico. Podr&aacute;s dar ese paso? Eso es el nacimiento de una manada salvaje. Determinar que no necesitamos nada m&aacute;s y que la prosperidad est&aacute; en la integridad de la libertad.</p>
+      </span>
+      <span class="lang-en">
+        <p>To be the one who rises, the one who walks outside of everyone, is to be rich. Can you take that step? That is the birth of a wild pack. To determine that we need nothing more and that prosperity lies in the integrity of freedom.</p>
+      </span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="fade-in">
+    <div class="section-label">
+      <span class="lang-es-inline">Sobre</span>
+      <span class="lang-en-inline">About</span>
+    </div>
+    <div class="section-title">
+      <span class="lang-es">El Autor</span>
+      <span class="lang-en">The Author</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-grid fade-in">
+    <img src="images/portrait.jpg" alt="Basti Marra" class="about-portrait">
+    <div>
+      <div class="about-name">Sebastian &ldquo;Basti&rdquo; Marra</div>
+      <div class="about-location">Tandil, Argentina</div>
+      <div class="about-text">
+        <span class="lang-es">
+          <p>Escritor, poeta y ensayista argentino. Su obra explora los territorios donde la filosof&iacute;a, la poes&iacute;a y la ficci&oacute;n se funden &mdash; espacios de fuego, manadas salvajes, &aacute;ngeles hambrientos y descensos a cielos que son m&aacute;s bien abismos.</p>
+          <p>Influenciado por el pensamiento de Deleuze, Guattari y Nietzsche, sus textos confrontan la moral, el capital y las instituciones con una escritura visceral que busca la velocidad del deseo y la potencia de lo salvaje.</p>
+          <p>Su obra incluye <em>Kaos y Velocidad</em> (Libro Continuo), la novela <em>Devorador de &Aacute;ngeles</em>, y los ensayos <em>Poliformas, Ladridos de Poder y Ambig&uuml;edad</em>, adem&aacute;s de una vasta colecci&oacute;n po&eacute;tica donde el amor, la rebeld&iacute;a y la naturaleza son fuerzas indistinguibles.</p>
+        </span>
+        <span class="lang-en">
+          <p>Argentine writer, poet, and essayist. His work explores the territories where philosophy, poetry, and fiction merge &mdash; spaces of fire, wild packs, hungry angels, and descents into heavens that are more like abysses.</p>
+          <p>Influenced by the thought of Deleuze, Guattari, and Nietzsche, his texts confront morality, capital, and institutions with a visceral writing that seeks the velocity of desire and the power of the wild.</p>
+          <p>His work includes <em>Kaos &amp; Velocity</em> (Libro Continuo), the novel <em>Devourer of Angels</em>, and the essays <em>Polyforms, Barks of Power &amp; Ambiguity</em>, along with a vast poetic collection where love, rebellion, and nature are indistinguishable forces.</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="contact-section" id="contacto">
+  <div class="section-label">
+    <span class="lang-es-inline">Contacto</span>
+    <span class="lang-en-inline">Contact</span>
+  </div>
+  <div class="section-title" style="margin-bottom:0;">
+    <span class="lang-es">Conectemos</span>
+    <span class="lang-en">Let's Connect</span>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:sbastimarra@gmail.com">sbastimarra@gmail.com</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <span>&copy; 2026 Basti Marra</span>
+</footer>
+
+
+<!-- ═══════════════ JS ═══════════════ -->
+<script>
+  // Language toggle
+  function toggleLang() {
+    document.body.classList.toggle('en');
+  }
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
