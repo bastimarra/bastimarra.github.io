@@ -314,6 +314,65 @@
       opacity: 0.9;
     }
 
+    /* ── ESSAY SECTION HEADER (image bg) ── */
+    .essay-header {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      min-height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .essay-header img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      filter: brightness(0.7);
+    }
+
+    .essay-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg), transparent 30%, transparent 65%, var(--bg));
+    }
+
+    .essay-header-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .essay-header-content .section-line {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+    }
+
+    .essay-piece-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--text);
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+    }
+
+    .essay-sign {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 40px;
+      text-align: right;
+    }
+
     /* ── PROSE / NOVEL ── */
     .prose-excerpt {
       font-family: var(--serif);
@@ -517,7 +576,7 @@
   <ul class="nav-links">
     <li><a href="#obra"><span class="lang-es-inline">Obra</span><span class="lang-en-inline">Work</span></a></li>
     <li><a href="#novela"><span class="lang-es-inline">Novela</span><span class="lang-en-inline">Novel</span></a></li>
-    <li><a href="#ensayo"><span class="lang-es-inline">Ensayo</span><span class="lang-en-inline">Essay</span></a></li>
+    <li><a href="#ensayos"><span class="lang-es-inline">Ensayos</span><span class="lang-en-inline">Essays</span></a></li>
     <li><a href="#about"><span class="lang-es-inline">Sobre</span><span class="lang-en-inline">About</span></a></li>
     <li><button class="lang-toggle" onclick="toggleLang()">EN / ES</button></li>
   </ul>
@@ -801,6 +860,38 @@
       </span>
     </div>
   </div>
+
+  <div class="fade-in">
+    <div class="work-label">
+      <span class="lang-es-inline">Poliformas, Ladridos de Poder y Ambig&uuml;edad</span>
+      <span class="lang-en-inline">Polyforms, Barks of Power &amp; Ambiguity</span>
+    </div>
+
+    <div class="prose-excerpt">
+      <span class="lang-es">
+        <p>Los ejes de la ansiedad siempre se establecen en orden a cosas que no nos atrevemos a sacar, motores &eacute;ticamente positivos y muchos negativos. Pero podemos usarla siempre como cargador y aprender a manipularla.</p>
+        <p>Alguna vez imaginaste la luz lejana pero que estirando la mano podes taparla? Esos sue&ntilde;os que sacrificas comprometen tu satisfacci&oacute;n, tu mano ya no puede hacer sombra. Entonces vas por otro objetivo definitivo, pero que muta.</p>
+      </span>
+      <span class="lang-en">
+        <p>The axes of anxiety are always established around things we dare not extract &mdash; ethically positive motors and many negative ones. But we can always use it as a charger and learn to manipulate it.</p>
+        <p>Have you ever imagined the distant light that you could cover just by stretching your hand? Those dreams you sacrifice compromise your satisfaction &mdash; your hand can no longer cast a shadow. So you go after another definitive goal, but one that mutates.</p>
+      </span>
+    </div>
+
+    <div class="highlight-line">
+      <span class="lang-es">La libertad no territorial es aquella que una vez lograda no te pueden quitar, por m&aacute;s que el control intente estarlo.</span>
+      <span class="lang-en">Non-territorial freedom is the kind that once achieved, cannot be taken from you &mdash; no matter how hard control tries.</span>
+    </div>
+
+    <div class="prose-excerpt">
+      <span class="lang-es">
+        <p>Ser el que se levanta, el que camina por fuera de todos, es ser rico. Podr&aacute;s dar ese paso? Eso es el nacimiento de una manada salvaje. Determinar que no necesitamos nada m&aacute;s y que la prosperidad est&aacute; en la integridad de la libertad.</p>
+      </span>
+      <span class="lang-en">
+        <p>To be the one who rises, the one who walks outside of everyone, is to be rich. Can you take that step? That is the birth of a wild pack. To determine that we need nothing more and that prosperity lies in the integrity of freedom.</p>
+      </span>
+    </div>
+  </div>
 </section>
 
 
@@ -871,44 +962,80 @@
 </div>
 
 
-<!-- ═══════════════ ESSAY ═══════════════ -->
-<section id="ensayo">
-  <div class="fade-in">
+<!-- ═══════════════ ENSAYOS ═══════════════ -->
+<div class="essay-header">
+  <img src="images/essay-bg.jpg" alt="">
+  <div class="essay-header-overlay"></div>
+  <div class="essay-header-content fade-in">
     <div class="section-label">
-      <span class="lang-es-inline">Ensayo</span>
-      <span class="lang-en-inline">Essay</span>
+      <span class="lang-es-inline">Ensayos</span>
+      <span class="lang-en-inline">Essays</span>
     </div>
     <div class="section-title">
-      <span class="lang-es">Poliformas, Ladridos de Poder y Ambig&uuml;edad</span>
-      <span class="lang-en">Polyforms, Barks of Power &amp; Ambiguity</span>
+      <span class="lang-es">Ensayos</span>
+      <span class="lang-en">Essays</span>
     </div>
     <div class="section-line"></div>
   </div>
+</div>
 
+<section id="ensayos">
   <div class="fade-in">
-    <div class="essay-text">
-      <span class="lang-es">
-        <p>Los ejes de la ansiedad siempre se establecen en orden a cosas que no nos atrevemos a sacar, motores &eacute;ticamente positivos y muchos negativos. Pero podemos usarla siempre como cargador y aprender a manipularla.</p>
-        <p>Alguna vez imaginaste la luz lejana pero que estirando la mano podes taparla? Esos sue&ntilde;os que sacrificas comprometen tu satisfacci&oacute;n, tu mano ya no puede hacer sombra. Entonces vas por otro objetivo definitivo, pero que muta.</p>
-      </span>
-      <span class="lang-en">
-        <p>The axes of anxiety are always established around things we dare not extract &mdash; ethically positive motors and many negative ones. But we can always use it as a charger and learn to manipulate it.</p>
-        <p>Have you ever imagined the distant light that you could cover just by stretching your hand? Those dreams you sacrifice compromise your satisfaction &mdash; your hand can no longer cast a shadow. So you go after another definitive goal, but one that mutates.</p>
-      </span>
-    </div>
-
-    <div class="highlight-line">
-      <span class="lang-es">La libertad no territorial es aquella que una vez lograda no te pueden quitar, por m&aacute;s que el control intente estarlo.</span>
-      <span class="lang-en">Non-territorial freedom is the kind that once achieved, cannot be taken from you &mdash; no matter how hard control tries.</span>
+    <div class="essay-piece-title">
+      <span class="lang-es">La ventana y la nada</span>
+      <span class="lang-en">The Window and the Void</span>
     </div>
 
     <div class="essay-text">
       <span class="lang-es">
-        <p>Ser el que se levanta, el que camina por fuera de todos, es ser rico. Podr&aacute;s dar ese paso? Eso es el nacimiento de una manada salvaje. Determinar que no necesitamos nada m&aacute;s y que la prosperidad est&aacute; en la integridad de la libertad.</p>
+        <p>&iquest;Qu&eacute; miran?</p>
+        <p>&iquest;Hay un horizonte sin l&iacute;mites que los entretiene en instantes que no terminan en agujas?</p>
+        <p>Los veo, algunos con sus cigarrillos frente a la ventana, u otros solas sin que se les muevan m&aacute;s que los p&aacute;rpados. Tal vez un suspiro irrumpe corto, un sorbo a su caf&eacute; o a su mate si no hay ventana de por medio, solo la vereda y una silla antigua de metal.</p>
+        <p>Es un horizonte an&aacute;logo, pero de pensamientos que logran capacidades inalcanzables en la inmediatez actual, que por momentos transmuta mirada, pero sin comentarios, sin decir nada.</p>
+        <p>&iquest;Es un horizonte? &iquest;Lo fue siempre?</p>
+        <p>Hay alguno que no llevan ni un sorbo, ven c&oacute;mo el aire entrama rarezas, pero que desmembran el tiempo, lo desfragmentan, lo reinterpretan, pero jam&aacute;s lo conceptualizan.</p>
+        <p>&iquest;Es una espera?</p>
+        <p>Enfrentados en diagonales, estaban aquellos dos caf&eacute;s, uno sobre una esquina antigua, desganada, con humedades y maderas que crujen para avisarnos que siguen ah&iacute;. Mesas que no siguen patrones geom&eacute;tricos, ni mucho menos estabilidades. El otro, algo m&aacute;s actual, pegado a un edificio hecho para oficinas, pero que solo 1 o 2 pisos tienen movimiento alguno. Este &uacute;ltimo tiene m&aacute;s pasteler&iacute;a, pero de esa que viene en bolsas para que quede clara la porci&oacute;n. En ambos, sujetos solitarios se sientan tardes enteras, a ver esos estremecedores pasares modernos, pero sin seguirles la vista, sin mover la cabeza. No hay celulares en aquellos habitantes de los instantes perpetuos, no hay m&aacute;s im&aacute;genes que el devenir.</p>
+        <p>Se les dice que tienen la mirada perdida, &iquest;pero si quienes la tienen realmente somos nosotros?</p>
+        <p>Mirar verticalidades no es contar pisos de aquellas oficinas, es m&aacute;s ir llenando el carrito de deseos y golosinas.</p>
+        <p>Algo hermoso, si lo hay, es que el primero no vende caf&eacute; para llevar. Tenes un pebete, pero todas sus botellas son de vidrio, imposibles de take away, as&iacute; como el resto de las cosas que tenga destino el paladar. El otro claramente no, tiene todo para la inmediatez, hasta 2 cajas para pagar. Pero rompiendo con esa velocidad, con barba de 2 semanas, borcegos con barro, camisa de jean, pucho en boca, est&aacute; &eacute;l, de unos 60 a&ntilde;os. Nunca mueve sus manos m&aacute;s que para levantar su t&eacute; o bien llevar su cigarrillo armado a la boca. Mira siempre al costado de un &aacute;rbol frente al caf&eacute;, cercano a una gran ventana enrejada, que siempre est&aacute; cerrada. Su silla en un &aacute;ngulo de 90 grados, su t&eacute; cercano a la mano izquierda y el cigarrillo posa a la espera en un cenicero muy colorido. (Lo llamativo es que siempre parece ser el mismo; vi diversos sobre las mesas, pero este, este siempre es el mismo).</p>
+        <p>&iquest;Ser&aacute; ese &aacute;rbol testigo de afecciones? &iquest;O m&aacute;s bien aquella ventana cerrada? No hay otros gestos, no hay suspiros, es ese mirar que solo resetea en pesta&ntilde;eos, que profundiza en especulaciones, dudas, miedos y felicidad. Ponderan afecciones que hacen de los segundos vientos veloces, donde la hoy amada m&eacute;trica se queda putrefacta, sin siquiera tomar una sola medida.</p>
+        <p>Hay un solo momento que lo cambia todo, cuando entre las peque&ntilde;as rendijas de la persiana se ve que se prende una luz. Ah&iacute; apaga su cigarrillo sin importar cu&aacute;nto le quedaba por seguir transform&aacute;ndose en ceniza y calor. Algo se transforma en aquellas afecciones, algo se modifica sin haber suspiro, sin haber otro movimiento m&aacute;s.</p>
+        <p>La precisi&oacute;n de esa escena no deja de sorprenderme, la espero, la observo tambi&eacute;n batallando el absurdo.</p>
+        <p>Sin irse, toma sus manos, se las acaricia y deja que aquel santiam&eacute;n sea su eternidad. No hay un tiempo exacto, solo un lugar com&uacute;n m&aacute;s: al sacar su saco de t&eacute; de la taza, le traen la cuenta. Todos los del lugar parecen estar atentos a aquel acto, porque su reacci&oacute;n siempre es inmediata.</p>
+        <p>En la otra esquina hay una mujer de pelo ondulado, que no debe llegar a los 50, con un taz&oacute;n enorme de caf&eacute;. En ese caf&eacute; no tienen estas tazas para otros clientes, pero s&iacute; para ella. Ese taz&oacute;n no parec&iacute;a tener l&iacute;mites, as&iacute; como sus dedos largos y ojos profundos.</p>
+        <p>Se sienta en una mesa que tiene un tabl&oacute;n de roble con dos v&eacute;rtices tallados con flores. Una mesa para al menos 4 personas, pero que nadie se anima a territorializar m&aacute;s que ella. Su mirada tiene dos destinos no finitos: la ventana izquierda, que da a una muebler&iacute;a chica de barrio, y el otro a la ventana de centro izquierda, m&aacute;s cerca de la puerta, que apunta a un mural que dibuja la vida de una semilla. Esta comienza viajando en los vientos humeantes de f&aacute;bricas, cayendo en los suelos de una batalla armada entre quienes parecieran ser los mismos trabajadores. Luego esa semilla es arrastrada por un topo, que llen&aacute;ndola de baba, le da al menos una gota de l&iacute;quido. Enterrada entre pisotones de lo que pareciera unos zapatos bien lustrados, encontr&oacute; tierra f&eacute;rtil. La planta toma vida en ese mural, sacando unas flores muy coloridas, unos movimientos hermosos, se va fortaleciendo entre esos campos e identidades que de a poco comercializan sus deseos de expansi&oacute;n, quedando entre veredas y cemento. Su fuerza rompe las veredas, de sombras frescas en los veranos mercantiles. En esa hermosa pintura, pareciera que resiste, pero cuando segu&iacute;s con la mirada, vendando entre cintas de moebius, un cami&oacute;n carga su madera con destino a aquellas f&aacute;bricas humeantes.</p>
+        <p>&iquest;Es un horizonte? &iquest;Siempre lo fue?</p>
+        <p>Cuando termina de recorrerlo entre lo que seguro son muchos devenires, sus manos se apoyan en la mesa. Otra luz se apaga, es la de la muebler&iacute;a; en ese no instante, ella se levanta. La sincronizaci&oacute;n es imperfecta, pero la deserci&oacute;n de seguir contemplando es total. Se va.</p>
+        <p>Una parte de m&iacute; siempre quiere acercarse, saber, tal vez sin preguntar, pero s&iacute; realmente tener la respuesta. &iquest;Es siempre perder la pregunta originaria, o sea estar ah&iacute; en el retorno del orgasmo precoz?</p>
       </span>
       <span class="lang-en">
-        <p>To be the one who rises, the one who walks outside of everyone, is to be rich. Can you take that step? That is the birth of a wild pack. To determine that we need nothing more and that prosperity lies in the integrity of freedom.</p>
+        <p>What are they looking at?</p>
+        <p>Is there a limitless horizon that entertains them in instants that never end in clock hands?</p>
+        <p>I see them &mdash; some with their cigarettes facing the window, others alone with nothing moving but their eyelids. Perhaps a short sigh breaks through, a sip of their coffee, or their mate if there is no window in between, only the sidewalk and an old metal chair.</p>
+        <p>It is an analog horizon, but one of thoughts that reach capacities unattainable in today's immediacy &mdash; a horizon that at moments transmutes the gaze, yet without comments, without saying anything.</p>
+        <p>Is it a horizon? Was it always one?</p>
+        <p>There are some who don't even take a sip; they watch how the air weaves oddities, oddities that dismember time, defragment it, reinterpret it, but never conceptualize it.</p>
+        <p>Is it a wait?</p>
+        <p>Set diagonally against each other stood those two caf&eacute;s: one on an old corner, listless, with damp patches and creaking wood that warns us it is still there. Tables that follow no geometric pattern, much less any stability. The other, somewhat more modern, attached to a building made for offices, though only one or two floors show any movement at all. This latter one has more pastries, but the kind that comes in bags so the portion is made clear. In both, solitary figures sit through entire afternoons, watching those startling modern passersby, but without following them with their eyes, without turning their heads. There are no cellphones among those inhabitants of perpetual instants; there are no images other than becoming.</p>
+        <p>They are said to have a lost gaze &mdash; but what if the ones who truly have it are us?</p>
+        <p>To look at verticalities is not to count the floors of those offices; it is more like filling the cart with desires and sweets.</p>
+        <p>Something beautiful, if there is any, is that the first one doesn't sell coffee to go. You can get a sandwich, but all its bottles are glass, impossible to take away, just like everything else destined for the palate. The other, clearly not: it has everything for immediacy, even two registers to pay at. But breaking with that speed &mdash; with a two-week beard, muddy boots, a denim shirt, a cigarette in his mouth &mdash; there he is, about sixty years old. He never moves his hands except to lift his tea or bring his hand-rolled cigarette to his lips. He always looks to the side of a tree in front of the caf&eacute;, near a large barred window that is always shut. His chair at a ninety-degree angle, his tea near his left hand, and the cigarette waiting in a very colorful ashtray. (What is striking is that he always seems to be the same one; I have seen various people at the tables, but this one, this one is always the same.)</p>
+        <p>Would that tree be a witness to afflictions? Or rather that shut window? There are no other gestures, no sighs; it is that gaze that only resets in blinks, that deepens into speculations, doubts, fears, and happiness. They ponder afflictions that turn seconds into swift winds, where today's beloved metric rots away without ever taking a single measurement.</p>
+        <p>There is a single moment that changes everything: when, through the small slits of the blind, a light is seen to turn on. That is when he puts out his cigarette, no matter how much of it was left to keep turning into ash and heat. Something transforms in those afflictions, something shifts with no sigh, with no other movement at all.</p>
+        <p>The precision of that scene never ceases to amaze me; I wait for it, I observe it too, battling the absurd.</p>
+        <p>Without leaving, he takes his own hands, caresses them, and lets that split-second be his eternity. There is no exact time, only one more common place: as he lifts his tea bag out of the cup, they bring him the check. Everyone in the place seems attentive to that act, because his reaction is always immediate.</p>
+        <p>On the other corner there is a woman with wavy hair, who can't be fifty yet, with an enormous bowl of coffee. In that caf&eacute; they don't have these bowls for other customers, but they do for her. That bowl seemed to have no limits, just like her long fingers and deep eyes.</p>
+        <p>She sits at a table with an oak plank, two of its corners carved with flowers. A table for at least four people, but that no one dares to territorialize except her. Her gaze has two non-finite destinations: the left window, which looks onto a small neighborhood furniture shop, and the other, the center-left window, closer to the door, pointing to a mural that depicts the life of a seed. It begins traveling on the smoking winds of factories, falling onto the soil of an armed battle between what appear to be the workers themselves. Then that seed is dragged along by a mole, which, coating it in slobber, gives it at least a drop of liquid. Buried beneath the stomping of what look like well-polished shoes, it found fertile soil. The plant comes to life in that mural, putting out very colorful flowers, beautiful movements; it grows stronger among those fields and identities that little by little commercialize their desires for expansion, left between sidewalks and cement. Its force breaks the pavement, casting fresh shadows over the mercantile summers. In that beautiful painting, it seems to resist &mdash; but when you follow it with your eyes, bandaging itself through M&ouml;bius strips, a truck loads its wood bound for those smoking factories.</p>
+        <p>Is it a horizon? Was it always?</p>
+        <p>When she finishes traversing it, among what are surely many becomings, her hands rest on the table. Another light goes out &mdash; that of the furniture shop; in that non-instant, she rises. The synchronization is imperfect, but the desertion from going on contemplating is total. She leaves.</p>
+        <p>A part of me always wants to draw closer, to know, perhaps without asking, yet to truly have the answer. Is that always to lose the original question &mdash; that is, to be there in the return of the premature orgasm?</p>
       </span>
+    </div>
+
+    <div class="essay-sign">
+      <span class="lang-es">Basti Marra &mdash; Domingo 16 de agosto de 2026, Tandil</span>
+      <span class="lang-en">Basti Marra &mdash; Sunday, August 16, 2026, Tandil</span>
     </div>
   </div>
 </section>
